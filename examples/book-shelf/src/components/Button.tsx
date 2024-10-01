@@ -42,7 +42,11 @@ export default function Button(props: AnchorProps | ButtonProps) {
     lg: "py-2 md:py-2.5 px-6 md:text-lg",
   };
 
-  const className = `${customClassName} ${pending && pendingText ? " cursor-not-allowed opacity-50" : ""} ${variantClassNames.base} ${variantClassNames[variant]} ${sizeClassNames[size]}`;
+  const className = `${customClassName} ${
+    pending && pendingText ? " cursor-not-allowed opacity-50" : ""
+  } ${variantClassNames.base} ${variantClassNames[variant]} ${
+    sizeClassNames[size]
+  }`;
 
   if (!!(props as AnchorProps).href) {
     const anchorProps = props as AnchorProps;
