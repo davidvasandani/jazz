@@ -1,4 +1,5 @@
 import { BookReview } from "@/schema";
+import RatingInput from "@/components/RatingInput";
 
 export function BookReviewForm({ bookReview }: { bookReview: BookReview }) {
   return (
@@ -10,7 +11,7 @@ export function BookReviewForm({ bookReview }: { bookReview: BookReview }) {
           type="text"
           value={bookReview.title}
           required
-          onChange={(e) => (bookReview.title = e.target.value)}
+          onChange={e => (bookReview.title = e.target.value)}
         ></input>
       </label>
 
@@ -21,7 +22,7 @@ export function BookReviewForm({ bookReview }: { bookReview: BookReview }) {
           type="text"
           value={bookReview.author}
           required
-          onChange={(e) => (bookReview.author = e.target.value)}
+          onChange={e => (bookReview.author = e.target.value)}
         ></input>
       </label>
 
@@ -30,7 +31,7 @@ export function BookReviewForm({ bookReview }: { bookReview: BookReview }) {
         <textarea
           className="rounded border border-gray-300 px-2 py-1 shadow-sm"
           value={bookReview.review}
-          onChange={(e) => (bookReview.review = e.target.value)}
+          onChange={e => (bookReview.review = e.target.value)}
         ></textarea>
       </label>
     </div>

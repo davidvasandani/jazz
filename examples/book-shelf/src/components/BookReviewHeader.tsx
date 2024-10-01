@@ -1,8 +1,11 @@
 import { BookReview } from "@/schema";
 import Rating from "@/components/Rating";
+import { Account } from "jazz-tools";
+import RatingInput from "@/components/RatingInput";
 
 export function BookReviewHeader({ bookReview }: { bookReview: BookReview }) {
   const { title, author, rating, review, dateRead } = bookReview;
+  const isMe = (bookReview._owner as Account).isMe;
   return (
     <div className="grid gap-5">
       <div>
@@ -12,10 +15,14 @@ export function BookReviewHeader({ bookReview }: { bookReview: BookReview }) {
 
         <p className="text-gray-500">by {author}</p>
       </div>
-
-      <Rating className="mx-auto text-2xl sm:mx-0" rating={rating} />
-
-      {/*<p className="text-sm text-gray-500">Read on {dateRead}</p>*/}
+      {isMe ? (
+        <RatingInput
+          onChange={rating => (bookReview.rating = rating)}
+          value={rating}
+        />
+      ) : (
+        <Rating className="mx-auto text-2xl sm:mx-0" rating={rating} />
+      )}
     </div>
   );
 }

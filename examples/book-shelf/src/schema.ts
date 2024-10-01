@@ -3,8 +3,8 @@ import { CoMap, co, CoList, Account, Profile, Group } from "jazz-tools";
 export class BookReview extends CoMap {
   title = co.string;
   author = co.string;
+  rating = co.number;
   dateRead? = co.number;
-  rating? = co.literal(1, 2, 3, 4, 5);
   review? = co.string;
 }
 
@@ -33,7 +33,7 @@ export class JazzAccount extends Account {
         {
           bookReviews: ListOfBookReviews.create([], { owner: group }),
         },
-        { owner: group },
+        { owner: group }
       );
     }
   }

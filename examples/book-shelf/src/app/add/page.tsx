@@ -4,6 +4,7 @@ import { useState } from "react";
 import { BookReview } from "@/schema";
 import { useAccount } from "@/components/JazzAndAuth";
 import { useRouter } from "next/navigation";
+import RatingInput from "@/components/RatingInput";
 
 export default function AddBookReview() {
   const { me } = useAccount();
@@ -12,6 +13,7 @@ export default function AddBookReview() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [review, setReview] = useState("");
+  const [rating, setRating] = useState(0);
 
   const router = useRouter();
 
@@ -23,10 +25,11 @@ export default function AddBookReview() {
         title,
         author,
         review,
+        rating,
       },
       {
         owner: me,
-      },
+      }
     );
 
     console.log({ bookReview });
@@ -47,7 +50,7 @@ export default function AddBookReview() {
             type="text"
             value={title}
             required
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
           ></input>
         </label>
 
@@ -58,16 +61,21 @@ export default function AddBookReview() {
             type="text"
             value={author}
             required
-            onChange={(e) => setAuthor(e.target.value)}
+            onChange={e => setAuthor(e.target.value)}
           ></input>
         </label>
+
+        <div className="grid gap-1 text-sm text-gray-600">
+          Rating
+          <RatingInput value={rating} onChange={rating => setRating(rating)} />
+        </div>
 
         <label className="grid gap-1 text-sm text-gray-600">
           Review
           <textarea
             className="rounded border border-gray-300 px-2 py-1 shadow-sm"
             value={review}
-            onChange={(e) => setReview(e.target.value)}
+            onChange={e => setReview(e.target.value)}
           ></textarea>
         </label>
         <button className="rounded bg-black p-2 text-white" type="submit">

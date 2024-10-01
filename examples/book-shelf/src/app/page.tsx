@@ -28,7 +28,7 @@ export default function Home() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
-        {me?.root?.bookReviews?.map((bookReview) => (
+        {me?.root?.bookReviews?.map(bookReview => (
           <BookReviewComponent key={bookReview.id} id={bookReview.id} />
         ))}
       </div>
