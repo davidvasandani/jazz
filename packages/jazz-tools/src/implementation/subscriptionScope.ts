@@ -33,6 +33,7 @@ export class SubscriptionScope<Root extends CoValue> {
     scheduledUpdate: boolean = false;
     cachedValues: { [id: ID<CoValue>]: CoValue } = {};
     parents: { [id: ID<CoValue>]: Set<ID<CoValue>> } = {};
+    rootSchema: CoValueClass<Root> & CoValueFromRaw<Root>
 
     constructor(
         root: Root,
@@ -50,6 +51,7 @@ export class SubscriptionScope<Root extends CoValue> {
 
         this.subscriber = root._loadedAs;
         this.onUpdate = onUpdate;
+        this.rootSchema = rootSchema;
         this.rootEntry.rawUnsub = root._raw.core.subscribe(
             (rawUpdate: RawCoValue | undefined) => {
                 if (!rawUpdate) return;
@@ -134,6 +136,7 @@ export class SubscriptionScope<Root extends CoValue> {
         for (const parent of this.parents[id] || []) {
             this.invalidate(parent, id, seen);
         }
+        this.rootEntry.value = this.rootSchema.fromRaw(this.rootEntry.value._raw) as Root;
     }
 
     unsubscribeAll() {
